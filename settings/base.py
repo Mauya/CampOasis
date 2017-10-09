@@ -26,6 +26,7 @@ SECRET_KEY = '<SECRET_KEY>'
 
 ALLOWED_HOSTS = []
 SITE_ID = 1
+INTERNAL_IPS = ('127.0.0.1',)
 
 
 # Application definition
@@ -38,11 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-
-AUTH_USER_MODEL = 'accounts.User'
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',
-                           'accounts.backends.EmailAuth',)
-LOGIN_URL = '/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
