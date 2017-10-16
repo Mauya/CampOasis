@@ -19,7 +19,15 @@ from accounts import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.get_index, name='index'),
+    url(r'^$', views.home, name='index'),
+
+    #Add Django site authentication urls (for login, logout, password management)
+
+    url(r'^pages/', include('django.contrib.auth.urls')),
+    url(r'^register/', views.register, name='register'),
+    url(r'^login/$', views.login, name='login'),
+    url(r'^profile/$', views.profile, name='profile'),
+
 ]
 
 if settings.DEBUG:

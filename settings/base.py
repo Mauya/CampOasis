@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'django_forms_bootstrap',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,10 @@ WSGI_APPLICATION = 'CampOasis.wsgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.backends.EmailAuth',
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.%s' % validator}
@@ -108,3 +113,5 @@ STATIC_ROOT = ''
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+AUTH_USER_MODEL = 'accounts.User'
