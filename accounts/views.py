@@ -59,5 +59,4 @@ def login(request):
 def profile(request):
     return render(request, 'profile.html')
 
-def shop(request):
-    return render(request, 'shop.html')
+

@@ -12,11 +12,14 @@ def product_list(request, category_slug=None):
         products = products.filter(category=category)
     return render(request,
                   'list.html',
-                  {'category': category, 'categories': categories, 'products': products}),
+                  {'category': category, 'categories': categories, 'products': products})
 
 
 def product_detail(request, slug):
     product = get_object_or_404(Product, id=id, slug=slug, available=True)
     return render(request,
                   'detail.html',
-                  {'product': product}),
+                  {'product': product})
+
+def shop(request):
+    return render(request, 'shop.html')

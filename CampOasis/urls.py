@@ -15,26 +15,26 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.conf import settings
 from django.contrib import admin
-from accounts import views
-
+import accounts.views
+import shop.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='index'),
+    url(r'^$', accounts.views.home, name='index'),
 
 
     # Add Django site authentication urls (for login, logout, password management)
 
     url(r'^pages/', include('django.contrib.auth.urls')),
-    url(r'^register/', views.register, name='register'),
-    url(r'^login/$', views.login, name='login'),
-    url(r'^profile/', views.profile, name='profile'),
+    url(r'^register/$', accounts.views.register, name='register'),
+    url(r'^login/$', accounts.views.login, name='login'),
+    url(r'^profile/$', accounts.views.profile, name='profile'),
 
     # Shop urls
 
-    url(r'^shop/', views.shop, name='shop'),
-    url(r'^$', views.product_list, name='product_list'),
-    url(r'^(?P<category_slug>[-\w]+)/$', views.product_list, name='product_list_by_category'),
-    url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.product_detail, name='product_detail'),
+    url(r'^shop/$', shop.views.shop, name='shop'),
+    url(r'^list/$', shop.views.product_list, name='product_list'),
+    url(r'^(?P<category_slug>[-\w]+)/$', shop.views.product_list, name='product_list_by_category'),
+    url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', shop.views.product_detail, name='product_detail'),
 ]
 
 if settings.DEBUG:
