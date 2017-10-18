@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts',
     'django_forms_bootstrap',
+    'shop',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -114,4 +116,5 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-AUTH_USER_MODEL = 'accounts.User'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

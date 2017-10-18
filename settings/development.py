@@ -7,7 +7,6 @@ INSTALLED_APPS.append('debug_toolbar')
 
 MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

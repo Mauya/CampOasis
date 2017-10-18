@@ -21,13 +21,20 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='index'),
 
-    #Add Django site authentication urls (for login, logout, password management)
+
+    # Add Django site authentication urls (for login, logout, password management)
 
     url(r'^pages/', include('django.contrib.auth.urls')),
     url(r'^register/', views.register, name='register'),
     url(r'^login/$', views.login, name='login'),
-    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/', views.profile, name='profile'),
 
+    # Shop urls
+
+    url(r'^shop/', views.shop, name='shop'),
+    url(r'^$', views.product_list, name='product_list'),
+    url(r'^(?P<category_slug>[-\w]+)/$', views.product_list, name='product_list_by_category'),
+    url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', views.product_detail, name='product_detail'),
 ]
 
 if settings.DEBUG:
