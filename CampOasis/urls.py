@@ -15,8 +15,11 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.conf import settings
 from django.contrib import admin
+from django.conf.urls.static import static
 import accounts.views
 import shop.views
+import cart.views
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', accounts.views.home, name='index'),
@@ -30,13 +33,18 @@ urlpatterns = [
     url(r'^profile/$', accounts.views.profile, name='profile'),
 
     # Shop urls
-
     url(r'^shop/$', shop.views.shop, name='shop'),
     url(r'^list/$', shop.views.product_list, name='product_list'),
     url(r'^(?P<category_slug>[-\w]+)/$', shop.views.product_list, name='product_list_by_category'),
     url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', shop.views.product_detail, name='product_detail'),
+
+    # cart urls
+    url(r'^$', cart.views.cart_detail, name='cart_detail'),
+    url(r'^add/(?P<product_id>\d+)/$', cart.views.cart_add, name='cart_add'),
+    url(r'^remove/(?P<product_id>\d+)/$', cart.views.cart_remove, name='cart_remove'),
 ]
 
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns.append(url(r'^debug/', include(debug_toolbar.urls)))
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
