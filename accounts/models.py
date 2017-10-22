@@ -5,12 +5,12 @@ from django.contrib.auth.models import UserManager
 # from django.db import models
 from django.utils import timezone
 
-class UserProfile(UserManager):
+class AccountUserManager(UserManager):
     def _create_user(self, username, email, password,
                      is_staff, is_superuser, **extra_fields):
         """
-       Creates and saves a User with the given username, email and password.
-       """
+        Creates and saves a User with the given username, email and password.
+        """
         now = timezone.now()
         if not email:
             raise ValueError('The given username must be set')
@@ -24,3 +24,21 @@ class UserProfile(UserManager):
         user.save(using=self._db)
 
         return user
+
+
+class User(AbstractUser):
+    # now that we've abstracted this class we can add any
+    # number of custom attribute to our user class
+    # in later units we'll be adding things like payment details!
+
+    stripe_id = models.CharField(max_length=40, default='')
+    subscription_end = models.DateTimeField(default=timezone.now)
+    objects = AccountUserManager()
+
+    def is_subscribed(self, magazine):
+        try:
+            purchase = self.purchases.get(magazine__pk=magazine.pk)
+        except Exception:
+            return False
+
+        return purchase.subscription_end > timezone.now()
