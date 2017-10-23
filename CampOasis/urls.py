@@ -16,7 +16,6 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-
 import accounts.views
 import cart.views
 import shop.views
@@ -31,6 +30,7 @@ urlpatterns = [
     url(r'^pages/', include('django.contrib.auth.urls')),
     url(r'^register/$', accounts.views.register, name='register'),
     url(r'^login/$', accounts.views.login, name='login'),
+    url(r'^logout/$', accounts.views.logout, name='logout'),
     url(r'^profile/$', accounts.views.profile, name='profile'),
 
     # Shop urls

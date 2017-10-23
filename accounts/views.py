@@ -59,4 +59,7 @@ def login(request):
 def profile(request):
     return render(request, 'profile.html')
 
-
+def logout(request):
+    auth.logout(request)
+    messages.success(request, 'You have successfully logged out')
+    return redirect(reverse('index'))

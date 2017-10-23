@@ -3,7 +3,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
-
 class UserRegistrationForm(UserCreationForm):
     MONTH_ABBREVIATIONS = [
         'Jan', 'Feb', 'Mar', 'Apr', 'May', 'June',
