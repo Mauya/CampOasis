@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import UserManager, AbstractUser
-from django.db import models
+from django.contrib.auth.models import AbstractUser, UserManager
+# from django.db import models
 from django.utils import timezone
-
 
 class AccountUserManager(UserManager):
     def _create_user(self, username, email, password,
