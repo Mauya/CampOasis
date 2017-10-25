@@ -5,7 +5,7 @@ from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
-from accounts.forms import UserRegistrationForm, UserLoginForm
+from accounts.forms import UserRegistrationForm, UserLoginForm, ContactForm
 from django.contrib.auth.decorators import login_required
 
 def home(request):
@@ -63,3 +63,8 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
+
+
+    return render(request, 'contact.html', {
+        'form': form_class,
+    })
