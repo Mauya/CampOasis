@@ -45,7 +45,7 @@ urlpatterns = [
     url(r'^remove/(?P<product_id>\d+)/$', cart.views.cart_remove, name='cart_remove'),
 
     # contact url
-    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^contact/$', accounts.views.contact, name='contact'),
 ]
 
 if settings.DEBUG:

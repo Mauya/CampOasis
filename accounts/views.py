@@ -64,6 +64,8 @@ def logout(request):
     messages.success(request, 'You have successfully logged out')
     return redirect(reverse('index'))
 
+def contact(request):
+    form_class = ContactForm
 
     return render(request, 'contact.html', {
         'form': form_class,
