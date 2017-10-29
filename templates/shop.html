@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <div id="shop-header">
-        <a href="/" class="logo">CampOasis shop</a>
+        <h2 href="/" class="title">CampOasis Shop For Hire</h2>
     </div>
-    <div id="subheader">
+    <div id="sub-header">
         <div class="cart">
             {% with total_items=cart|length %}
                 {% if cart|length > 0 %}
