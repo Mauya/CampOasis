@@ -24,6 +24,12 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', accounts.views.home, name='index'),
 
+    # URLs for the booking form.
+
+    url(r'^(?P<pk>\d+)/$',accounts.views.BookingDetailView.as_view(), name='booking_detail'),
+    url(r'^create/$',accounts.views.BookingCreateView.as_view(), name='booking_create'),
+    url(r'^$', accounts.views.BookingListView.as_view(), name='booking_list'),
+
 
     # Add Django site authentication urls (for login, logout, password management)
 

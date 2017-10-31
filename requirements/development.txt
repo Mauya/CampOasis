@@ -1,2 +1,5 @@
 -r base.txt
 django-debug-toolbar
+django-hvad
+django-countries
+django-libs

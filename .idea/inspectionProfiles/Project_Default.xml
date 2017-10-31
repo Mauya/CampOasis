@@ -455,6 +455,7 @@
           <option value="tweet_access.words" />
           <option value="tweet_access.screen_names" />
           <option value="tweet_access.hashtags" />
+          <option value="accounts.forms._" />
         </list>
       </option>
     </inspection_tool>
