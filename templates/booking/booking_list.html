@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "booking.base.html" %}
+{% block content %}
+    <h1>Booking List</h1>
+    <ul>
+        {% for booking in object_list %}
+            <li><a href="{% url 'booking_detail' pk=booking.pk %}">{{ booking }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
