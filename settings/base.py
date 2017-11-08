@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django_forms_bootstrap',
     'shop',
     'cart',
+    'booking',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

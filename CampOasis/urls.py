@@ -19,10 +19,12 @@ from django.contrib import admin
 import accounts.views
 import cart.views
 import shop.views
+import booking.views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', accounts.views.home, name='index'),
+    url(r'^', include('shop.urls', namespace='shop')),
 
 
     # Add Django site authentication urls (for login, logout, password management)
@@ -33,9 +35,15 @@ urlpatterns = [
     url(r'^logout/$', accounts.views.logout, name='logout'),
     url(r'^profile/$', accounts.views.profile, name='profile'),
 
+    # Booking form urls
+    url(r'^(?P<pk>\d+)/$', booking.views.booking_detail(), name='booking_detail'),
+    url(r'^$', booking.views.booking_form(), name='booking_form'),
+    url(r'^$', booking.views.booking_list(), name='booking_list'),
+
+
+
     # Shop urls
-    url(r'^shop/$', shop.views.shop, name='shop'),
-    url(r'^list/$', shop.views.product_list, name='product_list'),
+    url(r'^$', shop.views.product_list, name='product_list'),
     url(r'^(?P<category_slug>[-\w]+)/$', shop.views.product_list, name='product_list_by_category'),
     url(r'^(?P<id>\d+)/(?P<slug>[-\w]+)/$', shop.views.product_detail, name='product_detail'),
 
