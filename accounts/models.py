@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth.models import AbstractUser, UserManager
-# from django.db import models
+from django.db import models
 from django.utils import timezone
 
 class AccountUserManager(UserManager):
@@ -27,9 +27,8 @@ class AccountUserManager(UserManager):
 
 
 class User(AbstractUser):
-    # now that we've abstracted this class we can add any
-    # number of custom attribute to our user class
-
-    # in later units we'll be adding things like payment details!
+    gender = models.CharField(max_length=10, verbose_name='Gender', default='Male')
+    organisation = models.CharField(max_length=20, verbose_name='Organisation', default="")
+    phone = models.CharField(max_length=30, verbose_name='phone', default=".")
 
     objects = AccountUserManager()
