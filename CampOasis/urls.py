@@ -2,9 +2,12 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
+from CampOasis import views
 
 urlpatterns = [
+    url(r'^$', views.login.redirect, name='login_redirect'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^account/', include('accounts.urls')),
     url(r'^booking/', include('booking.urls', namespace='booking')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     # url(r'^orders/', include('orders.urls', namespace='orders')),
