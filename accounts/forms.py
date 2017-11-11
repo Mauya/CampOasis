@@ -1,10 +1,10 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import User
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
-class UserRegistrationForm(UserCreationForm):
+class RegistrationForm(UserCreationForm):
     password1 = forms.CharField(
         label='Password',
         widget=forms.PasswordInput
@@ -31,15 +31,17 @@ class UserRegistrationForm(UserCreationForm):
         return password2
 
     def save(self, commit=True):
-        instance = super(UserRegistrationForm, self).save(commit=False)
+        user = super(RegistrationForm, self).save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
 
-        # automatically set to email address to create a unique identifier
-        instance.username = instance.email
+        user.username = user.email
 
         if commit:
-            instance.save()
+            user.save()
 
-        return instance
+        return user
 
 class UserLoginForm(forms.Form):
     email = forms.EmailField()

@@ -1,34 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
-class AccountUserManager(UserManager):
-    def _create_user(self, username, email, password,
-                     is_staff, is_superuser, **extra_fields):
-        """
-       Creates and saves a User with the given username, email and password.
-       """
-        now = timezone.now()
-        if not email:
-            raise ValueError('The given username must be set')
-
-        email = self.normalize_email(email)
-        user = self.model(username=email, email=email,
-                          is_staff=is_staff, is_active=True,
-                          is_superuser=is_superuser,
-                          date_joined=now, **extra_fields)
-        user.set_password(password)
-        user.save(using=self._db)
-
-        return user
-
-
-class User(AbstractUser):
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
     gender = models.CharField(max_length=10, verbose_name='Gender', default='Male')
     organisation = models.CharField(max_length=20, verbose_name='Organisation', default="")
-    phone = models.CharField(max_length=30, verbose_name='phone', default=".")
+    phone = models.IntegerField(default=0)
 
-    objects = AccountUserManager()
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile, sender=User)

@@ -5,15 +5,15 @@ from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
-from accounts.forms import UserRegistrationForm, UserLoginForm, ContactForm
+from accounts.forms import RegistrationForm, UserLoginForm, ContactForm
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'home.html')
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
 
@@ -28,7 +28,7 @@ def register(request):
                 messages.error(request, "unable to log you in at this time!")
 
     else:
-        form = UserRegistrationForm()
+        form = RegistrationForm()
 
     args = {'form': form}
     args.update(csrf(request))
