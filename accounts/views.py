@@ -22,7 +22,7 @@ def register(request):
 
             if user:
                 messages.success(request, "You have successfully registered")
-                return redirect(reverse('profile'))
+                return redirect(reverse('/accounts'))
 
             else:
                 messages.error(request, "unable to log you in at this time!")
@@ -33,7 +33,7 @@ def register(request):
     args = {'form': form}
     args.update(csrf(request))
 
-    return render(request, 'register.html', args)
+    return render(request, 'accounts/register.html', args)
 
 def login(request):
     if request.method == 'POST':
@@ -53,11 +53,11 @@ def login(request):
 
     args = {'form': form}
     args.update(csrf(request))
-    return render(request, 'login.html', args)
+    return render(request, 'accounts/login.html', args)
 
 @login_required(login_url='/login/')
 def profile(request):
-    return render(request, 'profile.html')
+    return render(request, 'accounts/profile.html')
 
 def logout(request):
     auth.logout(request)
