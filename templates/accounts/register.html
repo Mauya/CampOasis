@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block content %}
+<div class="container">
   <form role="form" method="post" id="register-form" action="{% url 'register' %}">
     <div id="credit-card-errors" style="display:none">
       <div class="alert-message block-message error" id="stripe-error-message"></div>
@@ -14,4 +15,5 @@
       <input class="btn btn-primary" id="validate_card_btn" name="commit" type="submit" value="Register">
     </div>
   </form>
+</div>
 {% endblock %}
