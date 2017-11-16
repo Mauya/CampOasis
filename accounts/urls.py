@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/edit/$', views.edit_profile, name='edit_profile'),
 
     # contact url
     url(r'^contact/$', views.contact, name='contact'),

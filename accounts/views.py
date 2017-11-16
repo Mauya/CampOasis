@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from accounts.forms import RegistrationForm, UserLoginForm, ContactForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserChangeForm
 
 def home(request):
     return render(request, 'home.html')
@@ -57,7 +58,20 @@ def login(request):
 
 @login_required(login_url='/login/')
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    args = {'user': request.user}
+    return render(request, 'accounts/profile.html', args)
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/accounts/profile')
+    else:
+        form = UserChangeForm(instance=request.user)
+        args = {'form': form}
+        return render(request, 'accounts/edit_profile.html', args)
 
 def logout(request):
     auth.logout(request)
