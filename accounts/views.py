@@ -38,7 +38,7 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        form = UserLoginForm(request.POST)
+        form = UserLoginForm(request.POST or None)
         if form.is_valid():
             user = auth.authenticate(email=request.POST.get('email'), password=request.POST.get('password'))
 
@@ -48,7 +48,6 @@ def login(request):
                 return redirect(reverse('profile'))
             else:
                 form.add_error(None, "Your email or password was not recognised")
-
     else:
         form = UserLoginForm()
 
