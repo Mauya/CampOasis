@@ -9,6 +9,7 @@ def booking_form(request):
     form = BookingForm(request.POST or None)
     if form.is_valid():
         instance = form.save(commit=False)
+        instance.user = request.user
         instance.save()
         messages.success(request, "successfully created")
         return redirect(instance.get_absolute_url())
