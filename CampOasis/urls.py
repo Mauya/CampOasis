@@ -9,9 +9,9 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('accounts.urls')),
     url(r'^booking/', include('booking.urls', namespace='booking')),
+    url(r'^shop/', include('shop.urls', namespace='shop')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     # url(r'^orders/', include('orders.urls', namespace='orders')),
-    url(r'^shop/', include('shop.urls', namespace='shop')),
 ]
 
 if settings.DEBUG:
