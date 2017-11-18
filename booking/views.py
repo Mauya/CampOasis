@@ -36,7 +36,7 @@ def booking_list(request):
     }
     return render(request, 'booking/booking_list.html', context)
 
-def booking_update(request, id=None):
+def booking_edit(request, id=None):
     instance = get_object_or_404(Booking, id=id)
     form = BookingForm(request.POST or None, Instance=instance)
     if form.is_valid():
@@ -52,7 +52,7 @@ def booking_update(request, id=None):
     }
     return render(request, "", context)
 
-def post_delete(request, id=None):
+def booking_delete(request, id=None):
     instance = get_object_or_404(Booking)
     instance.delete()
     messages.success(request, "Successfully deleted")
