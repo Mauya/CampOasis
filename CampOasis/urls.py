@@ -5,7 +5,7 @@ from django.contrib import admin
 from CampOasis import views
 
 urlpatterns = [
-    url(r'^$', views.login.redirect, name='login_redirect'),
+    url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^account/', include('accounts.urls')),
     url(r'^booking/', include('booking.urls', namespace='booking')),
