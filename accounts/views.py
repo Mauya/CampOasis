@@ -5,9 +5,13 @@ from django.contrib import messages, auth
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
-from accounts.forms import RegistrationForm, UserLoginForm, ContactForm
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
+from accounts.forms import (
+    RegistrationForm,
+    EditProfileForm,
+    UserLoginForm,
+    ContactForm,
+)
+# from django.contrib.auth.models import User
 
 def home(request):
     return render(request, 'home.html')
@@ -55,27 +59,26 @@ def login(request):
     args.update(csrf(request))
     return render(request, 'accounts/login.html', args)
 
-@login_required(login_url='/login/')
-def profile(request):
+def view_profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
 def edit_profile(request):
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
+        form = EditProfileForm(request.POST, instance=request.user)
 
         if form.is_valid():
             form.save()
             return redirect('/accounts/profile')
     else:
-        form = UserChangeForm(instance=request.user)
+        form = EditProfileForm(instance=request.user)
         args = {'form': form}
         return render(request, 'accounts/edit_profile.html', args)
 
 def logout(request):
     auth.logout(request)
     messages.success(request, 'You have successfully logged out')
-    return redirect(reverse('index'))
+    return redirect(reverse('home'))
 
 def contact(request):
     form_class = ContactForm

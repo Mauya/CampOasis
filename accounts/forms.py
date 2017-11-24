@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class RegistrationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
     password1 = forms.CharField(
         label='Password',
         widget=forms.PasswordInput
@@ -17,7 +18,7 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
         exclude = ['username']
 
     def clean_password2(self):
@@ -51,12 +52,13 @@ class EditProfileForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ('email', 'first_name', 'last_name')
+        fields = ('email', 'first_name', 'last_name', 'password')
 
 class ContactForm(forms.Form):
     contact_name = forms.CharField(required=True)
     contact_email = forms.EmailField(required=True)
-    content = forms.CharField(
+    subject = forms.CharField(required=True)
+    message = forms.CharField(
         required=True,
         widget=forms.Textarea
     )
