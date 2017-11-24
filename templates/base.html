@@ -27,7 +27,8 @@
         <nav class = "navbar navbar-inverse navbar-fixed-top" id="navbar_whole">
 
             <div class = "navbar-header">
-                <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse" data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
+                <button type= "button" class = "navbar-toggle collapsed" data-toggle = "collapse"
+                        data-target= "#navbar" aria-expanded="false" aria-controls = "navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -39,29 +40,37 @@
             </div>
 
             <div id= "navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right">
-                   <li><a href="#">Home</a></li>
-                   <li><a href="#">Booking</a></li>
+                {% if user_is_authenticated %}
+                <ul class="nav navbar-nav">
+                   <li><a href="{% url 'accounts:home' %}">Home</a></li>
+                   <li><a href="{% url '' %}">Booking</a></li>
                    <li><a href="#">Shop</a></li>
                    <li><a href="#">Contact</a></li>
-                   <li><a href="{% url 'register' %}">Register</a></li>
-                   <li><a href="{% url 'login' %}">Log In</a></li>
-                   <li><a href="{% url 'logout' %}">Log Out</a></li>
+                    <li><a href="{% url 'accounts:logout' %}">Log Out</a></li>
+                     <li><a href="{% url 'accounts:view_profile' %}">Profile</a></li>
+                    <li><a href="{% url 'accounts:edit_profile' %}">Edit profile</a></li>
                 </ul>
+                {% else %}
+                <ul class = "nav navbar-nav pull-right">
+                   <li><a href="{% url 'accounts:register' %}">Register</a></li>
+                   <li><a href="{% url 'accounts:login' %}">Log In</a></li>
+                </ul>
+                {% endif %}
             </div>
         </nav>
 
    <hr>
-    {% if messages %}
-        <div class="alert alert-success">
-            <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
+    <div class="container">
+        {% if messages %}
+            <div class="alert alert-success">
+                <div class="messages">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+    </div>
     {% endif %}
-    {% include "messages_display.html" %}
 
 
    <div class="container">
