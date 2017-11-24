@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'accounts.apps.AccountsConfig',
     'shop',
     'cart',
+    'orders',
     'booking',
 ]
 
@@ -51,7 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'CampOasis.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'CampOasis.urls'
@@ -114,6 +116,13 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/account/'
+
+LOGIN_URL = '/account/login'
+
+LOGIN_EXEMPT_URLS = (
+    r'^account/logout/$',
+    r'^account/register/$'
+)
 
 DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda x: True
