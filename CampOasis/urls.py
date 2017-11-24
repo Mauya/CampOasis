@@ -7,7 +7,7 @@ from CampOasis import views
 urlpatterns = [
     url(r'^$', views.login_redirect, name='login_redirect'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^account/', include('accounts.urls')),
+    url(r'^account/', include('accounts.urls', namespace='accounts')),
     url(r'^booking/', include('booking.urls', namespace='booking')),
     url(r'^shop/', include('shop.urls', namespace='shop')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
