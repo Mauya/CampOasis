@@ -16,6 +16,13 @@ sqlite3
 * install VirtualEnv
 
 ### Prerequisites
+* When using Pycharm you can start project using the command line
+* Alternatively use the other option: select file --> create new Project and add Virtual environment from settings tab
+* The project container/directory is CampOasis
+
+'''django-admin startproject CampOasis'''
+* This is a Test Driven Development
+
 ### SettingUp
 ### Workflow
 ### Adding Apps
