@@ -6,7 +6,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 from django.template.context_processors import csrf
 from accounts.forms import (
-    RegistrationForm,
+    UserRegistrationForm,
     EditProfileForm,
     UserLoginForm,
     ContactForm,
@@ -18,7 +18,7 @@ def home(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
 
@@ -33,7 +33,7 @@ def register(request):
                 messages.error(request, "unable to log you in at this time!")
 
     else:
-        form = RegistrationForm()
+        form = UserRegistrationForm()
 
     args = {'form': form}
     args.update(csrf(request))
@@ -59,7 +59,7 @@ def login(request):
     args.update(csrf(request))
     return render(request, 'accounts/login.html', args)
 
-def view_profile(request):
+def profile(request):
     args = {'user': request.user}
     return render(request, 'accounts/profile.html', args)
 
