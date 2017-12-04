@@ -11,7 +11,7 @@ from accounts.forms import (
     UserLoginForm,
     ContactForm,
 )
-# from django.contrib.auth.models import User
+from accounts.models import User
 
 def home(request):
     return render(request, 'home.html')
