@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container">
-  <form role="form" method="post" id="register-form" action="{% url 'register' %}">
+  <form role="form" method="post" id="register-form" action="{% url 'accounts:register' %}">
     <legend>Register</legend>
     {% csrf_token %}
     {{ form.as_p}}
