@@ -11,7 +11,6 @@ from accounts.forms import (
     UserLoginForm,
     ContactForm,
 )
-from accounts.models import User
 
 def home(request):
     return render(request, 'home.html')

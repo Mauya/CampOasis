@@ -11,10 +11,11 @@ class UserProfile(models.Model):
     organisation = models.CharField(max_length=20, verbose_name='Organisation', default="")
     phone = models.IntegerField(default=0)
 
-    def create_profile(self, **kwargs):
-        if kwargs['get']:
-            profile = User.models.UserProfile()
-            profile.setUser(self)
-            profile.save()
+    def __str__(self):
+        return self.user.email
 
-    post_save.connect(create_profile, sender=User)
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile, sender=User)
